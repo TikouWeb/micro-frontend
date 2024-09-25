@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-micro-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-micro-app
+  template:
+    metadata:
+      labels:
+        app: react-micro-app
+    spec:
+      containers:
+        - name: react-micro-app
+          image: europe-west1-docker.pkg.dev/sandbox-nmesdour/micro-apps/react-micro-app:latest
+          ports:
+            - containerPort: 4200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-micro-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-micro-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 4200
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vue-micro-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vue-micro-app
+  template:
+    metadata:
+      labels:
+        app: vue-micro-app
+    spec:
+      containers:
+        - name: vue-micro-app
+          image: europe-west1-docker.pkg.dev/sandbox-nmesdour/micro-apps/vue-micro-app:latest
+          ports:
+            - containerPort: 4200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vue-micro-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: vue-micro-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 4200
