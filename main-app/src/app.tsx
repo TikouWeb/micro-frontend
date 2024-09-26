@@ -1,5 +1,6 @@
 import React, { Suspense, useCallback, useState } from "react";
 import VueWrapper from "./components/vue-wrapper";
+import { SkeletonChildrenDemo } from "./components/skeleton";
 
 const VueComponent = React.lazy(() =>
   import("vueMicroApp/vue-component"!).then((module) => ({
@@ -34,20 +35,20 @@ function App() {
     <div className="px-2">
       <h1 className="text-2xl font-bold mx-2 my-4">App</h1>
       <div className="flex gap-3">
-        <div className="flex gap-3 flex-col">
-          <Suspense fallback={<div>Loading Vue Microfrontend...</div>}>
+        <div className="flex gap-3 flex-col w-4/12">
+          <Suspense fallback={<SkeletonChildrenDemo />}>
             <VueComponent />
           </Suspense>
 
-          <Suspense fallback={<div>Loading React Microfrontend...</div>}>
+          <Suspense fallback={<SkeletonChildrenDemo />}>
             <div>
               <ReactMicrofrontend todosCount={todosCount} />
             </div>
           </Suspense>
         </div>
 
-        <div className="w-full">
-          <Suspense fallback={<div>Loading Vue Microfrontend...</div>}>
+        <div className="w-8/12">
+          <Suspense fallback={<SkeletonChildrenDemo />}>
             <VueTodoList
               title="Vue Todo List"
               onTodosChanged={onTodosChanged}
