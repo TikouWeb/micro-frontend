@@ -1,4 +1,4 @@
-import ReactComponent from "./components/react-component";
+import ReactComponent from "./components/dashboard";
 
 function App() {
   console.log(import.meta.env.VITE_BASE_PATH);

@@ -23,13 +23,14 @@ kind: Service
 metadata:
   name: react-micro-app-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: react-micro-app
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 4200
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -56,10 +57,44 @@ kind: Service
 metadata:
   name: vue-micro-app-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: vue-micro-app
   ports:
     - protocol: TCP
       port: 3000
+      targetPort: 4200
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: main-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: main-app
+  template:
+    metadata:
+      labels:
+        app: main-app
+    spec:
+      containers:
+        - name: main-app
+          image: europe-west1-docker.pkg.dev/sandbox-nmesdour/micro-apps/main-app:latest
+          ports:
+            - containerPort: 4200
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: main-app-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: main-app
+  ports:
+    - protocol: TCP
+      port: 4201
       targetPort: 4200

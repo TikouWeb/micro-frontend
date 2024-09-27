@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
         name: "react-microfrontend",
         filename: "remoteEntry.js",
         exposes: {
-          "./react-component": "./src/components/react-component.tsx",
+          "./react-component": "./src/components/dashboard.tsx",
         },
         shared: ["react", "react-dom"],
       }),

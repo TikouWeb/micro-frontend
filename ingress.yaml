@@ -11,12 +11,12 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /vue(/|$)(.*)
+            path: /()(.*)
             backend:
               service:
-                name: vue-micro-app-service
+                name: main-app-service
                 port:
-                  number: 3000
+                  number: 4201
           - pathType: ImplementationSpecific
             path: /react(/|$)(.*)
             backend:
@@ -24,3 +24,10 @@ spec:
                 name: react-micro-app-service
                 port:
                   number: 8080
+          - pathType: ImplementationSpecific
+            path: /vue(/|$)(.*)
+            backend:
+              service:
+                name: vue-micro-app-service
+                port:
+                  number: 3000

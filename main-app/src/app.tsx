@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback, useState } from "react";
+import React, { Suspense } from "react";
 import VueWrapper from "./components/vue-wrapper";
 import { SkeletonChildrenDemo } from "./components/skeleton";
 
@@ -23,36 +23,33 @@ const ReactMicrofrontend = React.lazy(
 );
 
 function App() {
-  const [todosCount, setTodosCount] = useState(null);
-
-  const onTodosChanged = useCallback((newTodos, oldTodos) => {
-    console.log(newTodos.length);
-
-    setTodosCount(newTodos.length);
-  }, []);
-
   return (
-    <div className="px-2">
-      <h1 className="text-2xl font-bold mx-2 my-4">App</h1>
-      <div className="flex gap-3">
-        <div className="flex gap-3 flex-col w-4/12">
+    <div className="px-4">
+      <h1 className="text-2xl font-bold mx-2 my-4">
+        Micro fontend (Powered By React)
+      </h1>
+      <div className="flex gap-6">
+        <div className="flex gap-6 flex-col w-4/12">
           <Suspense fallback={<SkeletonChildrenDemo />}>
-            <VueComponent />
+            <div className="w-full p-4 shadow-md rounded-md">
+              <h5 className="text-xl mb-2">Powered By Vue</h5>
+              <VueComponent />
+            </div>
           </Suspense>
 
           <Suspense fallback={<SkeletonChildrenDemo />}>
-            <div>
-              <ReactMicrofrontend todosCount={todosCount} />
+            <div className="w-full p-4 shadow-md rounded-md">
+              <h5 className="text-xl mb-2">Powered By Vue</h5>
+              <VueTodoList />
             </div>
           </Suspense>
         </div>
 
         <div className="w-8/12">
           <Suspense fallback={<SkeletonChildrenDemo />}>
-            <VueTodoList
-              title="Vue Todo List"
-              onTodosChanged={onTodosChanged}
-            />
+            <div>
+              <ReactMicrofrontend />
+            </div>
           </Suspense>
         </div>
       </div>

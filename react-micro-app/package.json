@@ -8,11 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "preview:watch": "concurrently \"vite preview -l silent\" \"vite build --watch\""
+    "preview:watch": "concurrently \"vite preview\" \"vite build --watch\""
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-virtuoso": "^4.10.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

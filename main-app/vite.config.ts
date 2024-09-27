@@ -12,8 +12,14 @@ export default defineConfig(({ mode }) => {
       federation({
         name: "main-app",
         remotes: {
-          vueMicroApp: "http://micro-apps.local/vue/assets/remoteEntry.js",
-          reactMicroApp: "http://micro-apps.local/react/assets/remoteEntry.js",
+          vueMicroApp:
+            mode === "production"
+              ? "/vue/assets/remoteEntry.js"
+              : "http://localhost:4172/assets/remoteEntry.js",
+          reactMicroApp:
+            mode === "production"
+              ? "/react/assets/remoteEntry.js"
+              : "http://localhost:4171/assets/remoteEntry.js",
         },
         shared: ["react", "react-dom", "vue", "vuetify"],
       }),
